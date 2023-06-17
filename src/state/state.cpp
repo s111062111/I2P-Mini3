@@ -13,7 +13,44 @@
  */
 int State::evaluate(){
   // [TODO] design your own evaluation function
-  return 0;
+  int value=0;
+  Board b=this->board;
+  for(int i=0; i<2; i++){
+    for(int j=0; j<BOARD_H; j++){
+      for(int k=0; k<BOARD_W; k++){
+          switch(b.board[i][j][k]){
+            case 1: //pawn 
+              if(i==0) value+=1;
+              else if(i==1) value-=1;
+              break;
+            case 2: //rook
+              if(i==0) value+=5;
+              else if(i==1) value-=5;
+              break;
+            case 3: //knight
+              if(i==0) value+=3;
+              else if(i==1) value-=3;
+              break;
+            case 4: //bishop
+              if(i==0) value+=3;
+              else if(i==1) value-=3;
+              break;
+            case 5: //queen
+              if(i==0) value+=9;
+              else if(i==1) value-=9;
+              break;              
+            case 6: //king
+              if(i==0) value+=10000;
+              else if(i==1) value-=10000;
+              break;
+            default:
+              break;
+        }
+      }
+    }
+  }
+
+  return value;
 }
 
 

@@ -8,7 +8,6 @@
 
 #include "../config.hpp"
 
-
 typedef std::pair<size_t, size_t> Point;
 typedef std::pair<Point, Point> Move;
 class Board{
