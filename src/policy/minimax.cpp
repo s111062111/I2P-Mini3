@@ -13,7 +13,6 @@ using namespace std;
  * @return Move 
  */
 
-
 pair<Move, int> MinMaxTree(State* root, int player, int depth)
 {
     int max=-10000000, min=10000000, value;
@@ -21,7 +20,7 @@ pair<Move, int> MinMaxTree(State* root, int player, int depth)
         root->get_legal_actions();
     auto actions=root->legal_actions;
 
-    Move move={{0, 0}, {0, 0}};
+    Move move=actions[0];
     if(!depth)
         return {move, root->evaluate()};
     else if(root->game_state==WIN){

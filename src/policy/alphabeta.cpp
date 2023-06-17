@@ -13,7 +13,6 @@ using namespace std;
  * @return Move 
  */
 
-
 //move <value, a or b>
 pair<Move, int> AlphaBetaTree(State* root, int player, int depth, int alpha, int beta)
 {
@@ -22,9 +21,8 @@ pair<Move, int> AlphaBetaTree(State* root, int player, int depth, int alpha, int
     auto actions=root->legal_actions;
 
     Move move=actions[0];
-    if(!depth){
+    if(!depth)
         return {move, root->evaluate()};
-    }
     else if(root->game_state==WIN){
         if(!player) return {move, 10000000};
         else if(player) return {move, -10000000}; 
@@ -46,7 +44,7 @@ pair<Move, int> AlphaBetaTree(State* root, int player, int depth, int alpha, int
                 break;
         }
         else if(player){
-            if(p.second<beta){ //???
+            if(p.second<beta){
                 move=act;
                 beta=p.second;
             }
@@ -59,7 +57,6 @@ pair<Move, int> AlphaBetaTree(State* root, int player, int depth, int alpha, int
     else if(player)
         return {move, beta};
 }
-
 
 Move AlphaBeta::get_move(State *state, int depth){
   return AlphaBetaTree(state, state->player, 6, -1000000, 1000000).first;

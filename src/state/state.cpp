@@ -11,6 +11,7 @@
  * 
  * @return int 
  */
+
 int State::evaluate(){
   // [TODO] design your own evaluation function
   int value=0;
@@ -19,23 +20,23 @@ int State::evaluate(){
     for(int j=0; j<BOARD_H; j++){
       for(int k=0; k<BOARD_W; k++){
           switch(b.board[i][j][k]){
-            case 1: //pawn 
+            case 1: //pawn 1
               if(i==0) value+=1;
               else if(i==1) value-=1;
               break;
-            case 2: //rook
+            case 2: //rook 5
               if(i==0) value+=5;
               else if(i==1) value-=5;
               break;
-            case 3: //knight
+            case 3: //knight 3
               if(i==0) value+=3;
               else if(i==1) value-=3;
               break;
-            case 4: //bishop
+            case 4: //bishop 3
               if(i==0) value+=3;
               else if(i==1) value-=3;
               break;
-            case 5: //queen
+            case 5: //queen 9
               if(i==0) value+=9;
               else if(i==1) value-=9;
               break;              
@@ -53,6 +54,60 @@ int State::evaluate(){
   return value;
 }
 
+int State::Jevaluate(){
+  // [TODO] design your own evaluation function
+  int mypiece=0;
+  int oppnpiece=0;
+  for (int i = 0; i < BOARD_H; i++){
+    for (int j = 0; j < BOARD_W; j++){
+      if (board.board[player][i][j]){
+        switch (board.board[player][i][j]){
+          case 1:
+            mypiece+=1000+piece_square_table_pawn[player][i][j];
+            break;
+          case 2:
+            mypiece+=5000+piece_square_table_rook[player][i][j];
+            break;
+          case 3:
+            mypiece+=3200+piece_square_table_knight[player][i][j];
+            break;
+          case 4:
+            mypiece+=3300+piece_square_table_bishop[player][i][j];
+            break;
+          case 5:
+            mypiece+=9000+piece_square_table_queen[player][i][j];
+            break;
+          case 6:
+            mypiece+=100000000+piece_square_table_king[player][i][j];
+            break;
+        }
+      }
+      if (board.board[1-player][i][j]){
+        switch (board.board[1-player][i][j]){
+          case 1:
+            oppnpiece+=1000+piece_square_table_pawn[1-player][i][j];
+            break;
+          case 2:
+            oppnpiece+=5000+piece_square_table_rook[1-player][i][j];
+            break;
+          case 3:
+            oppnpiece+=3200+piece_square_table_knight[1-player][i][j];
+            break;
+          case 4:
+            oppnpiece+=3300+piece_square_table_bishop[1-player][i][j];
+            break;
+          case 5:
+            oppnpiece+=9000+piece_square_table_queen[1-player][i][j];
+            break;
+          case 6:
+            oppnpiece+=100000000+piece_square_table_king[1-player][i][j];
+            break;
+        }
+      }
+    }
+  }
+  return mypiece-oppnpiece;
+}
 
 /**
  * @brief return next state after the move
