@@ -12,6 +12,52 @@
  * @return int 
  */
 
+int KBweight[BOARD_H][BOARD_W]={
+    {1, 1, 1, 1, 1},
+    {1, 4, 4, 4, 1},
+    {1, 6, 6, 6, 1},
+    {1, 6, 6, 6, 1},
+    {1, 4, 4, 4, 1},
+    {1, 1, 1, 1, 1}
+};
+
+int WRweight[BOARD_H][BOARD_W]={
+    {1, 1, 1, 1, 1},
+    {2, 2, 2, 2, 2},
+    {2, 3, 3, 3, 2},
+    {3, 4, 4, 4, 3},
+    {4, 6, 6, 6, 4},
+    {1, 1, 1, 1, 1},
+};
+
+int BRweight[BOARD_H][BOARD_W]={
+    {1, 1, 1, 1, 1},
+    {4, 6, 6, 6, 4},
+    {3, 4, 4, 4, 3},
+    {2, 3, 3, 3, 2},
+    {2, 2, 2, 2, 2},
+    {1, 1, 1, 1, 1},
+};
+
+int WPweight[BOARD_H][BOARD_W]={
+    {20, 20, 20, 20, 20},
+    {6, 6, 6, 6, 6},
+    {3, 4, 4, 4, 3},
+    {1, 3, 3, 3, 1},
+    {1, 1, 1, 1, 1},
+    {1, 1, 1, 1, 1}
+};
+
+int BPweight[BOARD_H][BOARD_W]={
+    {1, 1, 1, 1, 1},
+    {1, 1, 1, 1, 1},
+    {1, 3, 3, 3, 1},
+    {3, 4, 4, 4, 3},
+    {4, 6, 6, 6, 4},
+    {20, 20, 20, 20, 20},
+};
+
+
 int State::evaluate(){
   // [TODO] design your own evaluation function
   int value=0;
@@ -21,28 +67,28 @@ int State::evaluate(){
       for(int k=0; k<BOARD_W; k++){
           switch(b.board[i][j][k]){
             case 1: //pawn 1
-              if(i==0) value+=1;
-              else if(i==1) value-=1;
+              if(i==0) value+=1+WPweight[j][k];
+              else if(i==1) value-=1+BPweight[j][k];
               break;
             case 2: //rook 5
-              if(i==0) value+=5;
-              else if(i==1) value-=5;
+              if(i==0) value+=5+WRweight[j][k];
+              else if(i==1) value-=5+BRweight[j][k];
               break;
             case 3: //knight 3
-              if(i==0) value+=3;
-              else if(i==1) value-=3;
+              if(i==0) value+=3+KBweight[j][k];
+              else if(i==1) value-=3+KBweight[j][k];
               break;
             case 4: //bishop 3
-              if(i==0) value+=3;
-              else if(i==1) value-=3;
+              if(i==0) value+=3+KBweight[j][k];
+              else if(i==1) value-=3+KBweight[j][k];
               break;
             case 5: //queen 9
-              if(i==0) value+=9;
-              else if(i==1) value-=9;
-              break;              
+              if(i==0) value+=20;
+              else if(i==1) value-=20;
+              break;            
             case 6: //king
-              if(i==0) value+=10000;
-              else if(i==1) value-=10000;
+              if(i==0) value+=100000;
+              else if(i==1) value-=100000;
               break;
             default:
               break;
