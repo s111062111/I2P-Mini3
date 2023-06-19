@@ -161,7 +161,7 @@ void Free(node* root)
 
 Move MCTS::get_move(State *state, int depth){
     
-    int simulation=100000;
+    long long int simulation=100000000;
     double max=-1, min=10000000;
     node* MCTSRoot;
     node* select;
