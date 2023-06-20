@@ -59,5 +59,5 @@ pair<Move, int> AlphaBetaTree(State* root, int player, int depth, int alpha, int
 }
 
 Move AlphaBeta::get_move(State *state, int depth){
-  return AlphaBetaTree(state, state->player, 6, -1000000, 1000000).first;
+  return AlphaBetaTree(state, state->player, depth, -1000000, 1000000).first;
 }

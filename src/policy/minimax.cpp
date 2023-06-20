@@ -54,5 +54,5 @@ pair<Move, int> MinMaxTree(State* root, int player, int depth)
 }
 
 Move MinMax::get_move(State *state, int depth){
-  return MinMaxTree(state, state->player, 4).first;
+  return MinMaxTree(state, state->player, depth).first;
 }
